@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>기본문법</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h1>첫번째 제목</h1><!-- 제목 -->
+    <p>즐거운 웹 프로그래밍 입문</p> <!-- 문장(패러그랩) -->
+
+    <div> <!-- 그냥 그룹핑. 화면상에 변화는 없음 -->
+        <h1>두번째 제목</h1>
+        <p>정말 즐거운가요?</p>
+        <img src="./cat.jpg" width="300" height="200"> <!-- 이미지 태그 -->
+    </div>
+
+    <p><b>Lorem</b> <em>ipsum,</em> dolor sit <strong>amet</strong> consectetur adipisicing elit. <br> 
+        <Mark>Libero aliquid officiis dignissimos</Mark> consequatur <u>ratione</u> temporibus, <strike>quasi optio a</strike>, <br>
+        <small>est assumenda</small> ut. E<sub>nim</sub> ad <sup>explicabo</sup>, nulla nostrum illo illum officia.</p>
+    <p>&lt; &amp; &gt; &copy; &nbsp;&nbsp;&nbsp;&nbsp; &plusmn;</p>
+
+    <!-- 가로선 -->
+    <hr>
+    <!-- HTML에서 제일 중요한 태그, 링크테그 target _blank(새창), _self(현재페이지)-->
+    <a href="https://www.naver.com" target="_blank">naver</a>
+    <a href="mailto:personar95@naver.com">메일 보내기</a>
+    
+    <!-- 목록, 순번없는 목록 ul, 순번있는 목록 ol -->
+    <div>
+        <ul>
+            <li>복숭아</li>
+            <li>사과</li>
+            <li>바나나</li>
+        </ul>
+    </div>
+    <div>
+        <ol>
+            <li>봄
+                <ul>
+                    <li>벚꽃놀이</li>
+                    <li>피크닉</li>
+                </ul>
+            </li>
+            <li>여름</li>
+            <li>가을</li>
+            <li>겨울</li>
+        </ol>
+    </div>
+
+    <!-- 테이블 -->
+    <table border="1">
+        <caption>
+            <strong>제목줄</strong>
+        </caption>
+        <tr>
+            <th>1번셀</th>
+            <th>2번셀</th>
+            <th>3번셀</th>
+            <th>4번셀</th>
+        </tr>
+        <tr>
+            <td>90</td>
+            <td>86</td>
+            <td colspan="2">75</td>
+        </tr>
+        <tr>
+            <td>90</td>
+            <td>86</td>
+            <td>75</td>
+            <td rowspan="2">100</td>
+        </tr>
+        <tr>
+            <td>90</td>
+            <td>86</td>
+            <td>75</td>
+        </tr>
+    </table>
+    <audio controls>
+        <source src="./sample.mp3">
+        <source src="./sample.mp3">
+    </audio>
+    <br>
+    <video controls width="500">
+        <source src="./sample.mp4">
+    </video>
+    <br>
+    <embed type="gif" src="./sample.gif"
+            width="350" height="250">
+    <br>
+    <object type="application/pdf"
+            data="./sample.pdf"
+            width="250"
+            height="380"></object>
+    <br>
+</body>
+</html>
