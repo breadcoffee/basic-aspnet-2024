@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>CSS BackgroundImage</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        /* 배경이미지 */
+        body{
+            /* background-color: antiquewhite;
+            background-image: url('./backtile.gif');
+            background-repeat: no-repeat;
+            background-position: top;
+            background-attachment: fixed; */
+            background: url('./backtile.gif') repeat fixed top #d3d3d3;
+        }
+        /* xx-small ~ xx-large, px, %, em... */
+        p{
+            font-size: 20px;
+            font-family: NanumGothic;
+            font-style: normal;
+            font-weight: bold;
+            text-align: right;
+        }
+        a{
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: solid;
+        }
+        .test {
+            width: 300px; height: 150px;
+            background: #ff0000;
+            background: linear-gradient(0deg,#ff0000 0%, #00ff00 80%);
+            background: -webkit-linear-gradient(0deg,#ff0000 0%, #00ff00 80%);
+            background: -moz-linear-gradient(0deg,#ff0000 0%, #00ff00 80%);
+        }
+    </style>
+</head>
+<body>
+    <a href="https://www.naver.com" style="text-decoration: none;">네이버</a>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, inventore?</p>
+
+    <div class="test"></div>
+</body>
+</html>

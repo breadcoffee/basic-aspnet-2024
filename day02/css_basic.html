@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>CSS 기본</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        /* CSS 기본문법
+            선택자 { 키:값, 키:값; 키:값; }
+            * : 모든 태그를 말함
+        */
+        h1 { 
+            color:chocolate;
+            background-color:blanchedalmond;
+            margin:20px;
+            padding:10px;
+        }
+        h2 {
+            color: darkviolet;
+        }
+        h1, h2{
+            margin: 5px;
+            padding: 10px;
+        }
+        /* 아이디 선택자 */
+        #header {
+            width: 600px; height: 150px; margin: 0 auto;
+            background-color: cadetblue;
+        }
+        #section {
+            width: 600px; margin: 0 auto;
+            overflow: hidden; /* 사이즈가 600인데 자식 개체 사이즈가 600을 넘어가면 부모 사이즈에 맞춤 */
+        }
+        #content {
+            width: 400px; height: 150px;
+            float: left;
+            background-color: aquamarine;
+        }
+        #aside {
+            width: 200px; height: 200px;
+            float: right;
+            background-color: aqua;
+        }
+        .favorite {
+            color: coral;
+        }
+        .options {
+            background-color: lemonchiffon;
+        }
+        /* 속성 선택자 */
+        input[type="text"] { background-color: yellow; }
+        input[type="password"] { background-color: yellowgreen; }
+        input[type="submit"] { background-color: brown; color: white; }
+        /* 후손 선택자 */
+        #header h4 { color: salmon; }
+        /* 자손 선택자 */
+        #section > #aside { font-style: italic; }
+        /* 반응 선택자 */
+        h1:hover { color:yellow }
+        h1:active { color:black }
+        /* 구조 선택자 */
+        .second-nav > ul { overflow: hidden; }
+        .second-nav li { 
+            list-style: none; color: aliceblue;
+            float: left; padding: 10px;
+        }
+        .second-nav li:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+        .second-nav li:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+        .second-nav li:nth-child(2n+1){
+            background-color: darkkhaki;
+        }
+        .second-nav li:nth-child(2n){
+            background-color: mediumpurple;
+        }
+        /* border, margin, padding는 left, right, bottom, top 추가 속성이 있음 */
+        .box {
+            width: 50px; height: 50px;
+            background-color: darkred;
+            border: 20px dashed crimson;
+            /* 위의 border와 동일한 속성
+            border-width: 20px;
+            border-style: dashed;
+            border-color: crimson;
+            */
+            margin: 35px; padding: 30px;
+            border-radius: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Basic</h1>
+    <h2>Basic 문법</h2>
+    <hr>
+    <div>
+        <ul>
+            <li class="favorite options">기본선택자</li>
+            <li>아이디, 클래스 선택자</li>
+            <li>속성선택자</li>
+            <li class="favorite">후손선택자</li>
+        </ul>
+    </div>
+    <div id="header">
+        <h3>#header영역</h3>
+        <div id="nav">
+            <h4>Navigation(메뉴)영역</h4>
+        </div>
+        <div>
+            <h4>옵션</h4>
+        </div>
+    </div>
+    <div id="section">
+        <!-- id는 같은 값을 한페이지 두개 넣으면 안됨-->
+        <div id="content">
+            <h3>#content영역</h3>
+        </div>
+        <div id="aside">
+            <h3>#aside영역</h3>
+            <ul id="menu">
+                <li><a href="#">영한소개</a></li>
+                <li>영한컬럼</li>
+                <li>영한프로젝트</li>
+            </ul>
+        </div>
+    </div>
+    <form>
+        <input type="text"><br>
+        <input type="password"><br>
+        <input type="submit">
+    </form>
+    <div class="second-nav">
+        <ul>
+            <li><a href="#">첫번째 메뉴</a></li>
+            <li>두번째 메뉴</li>
+            <li>세번째 메뉴</li>
+            <li>네번째 메뉴</li>
+            <li>다섯번째 메뉴</li>
+            <li>여섯번째 메뉴</li>
+            <li>일곱번째 메뉴</li>
+        </ul>
+    </div>
+    <div class="box">
+
+    </div>
+</body>
+</html>
