@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>JS 연습</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        // 변수선언
+         let radius = 10;
+         const pi = 3.14159265;
+
+         // 출력
+         res = 2 * radius * pi
+         //alert(2 * radius * pi);
+
+         // 콘솔출력(개발자 로그)
+         console.log(res);
+
+         if(res > 100) {
+            console.log('원의 둘레는 100보다 큽니다.');
+         } else{
+            console.log('원의 둘레는 100보다 작습니다.')
+         }
+
+         let date = new Date();
+         let year = date.getFullYear(); // 년도
+         let month = date.getMonth(); // 월
+         let day = date.getDate(); // 일 getDay : 월(1) ~ 일(7)을 표시해줌
+         let hour = date.getHours(); // 시
+         let minute = date.getMinutes(); // 분
+         let sencond = date.getSeconds(); // 초
+         console.log(date);
+         console.log(year + '-' + (month+1) + '-' + day + ' ' + hour + ':' + minute + ':' + sencond);
+
+         // 배열변수 선언 == 파이썬과 동일(오만가지가 다 들어감)
+         let array = [300.9, false, 'String', [1,2,3], { 'key':'value', 'option':true}, function() { alert('Hey'); }]
+         console.log(array[0]);
+        // let i = 0;
+        //  while (i < array.length){
+        //     alert(array[i]);
+        //     i++;
+        //  }
+        
+        for(var i = 0; i < array.length; i++){
+            console.log(i + '번 출력: ' + array[i]);
+        }
+
+        // 함수
+        let fn1 = function() {
+            console.log('함수 fn1 실행!');
+            console.log('함수종료!');
+        }
+        console.log('변수타입 = ' + typeof(fn1));
+        fn1();
+
+        function fn2() {
+            console.log('함수 fn1 실행!');
+            console.log('함수종료!');
+        }
+        console.log('타입 = ' + typeof(fn2));
+        fn2();
+
+        // 함수 우선순위(익명함수 > 함수)
+        var fn = function() { console.log('fn10'); }; // 얘는 실행안됨
+        var fn = function() { console.log('fn20'); }; // 뒤에 선언된 익명함수가 실행됨
+        fn();
+
+        var fm = function() { console.log('fn10'); };
+        function fm() { console.log('fn20'); }; // 얘는 실행안됨(우선순위에서 밀림)
+        fm();
+
+        function ff(x){
+            return x * x;
+        }
+        console.log(ff(10))
+
+        // 콜백함수(매개변수의 함수를 할당)
+        function callTenTimes(callback){
+            for(var i = 0; i < 5; i++){
+                callback(); // 매개변수가 함수
+            }
+        }
+        
+        var callFunc = function() {
+            console.log('콜백 호출!!!')
+        };
+        callTenTimes(callFunc);
+
+        // JavaScript 객체
+        let product = {
+            품명 : '7D 건조망고',
+            유형 : '당절임 건조과일',
+            성분 : '망고, 설탕, 메타중아황산나트륨, 치자황색소',
+            원산지 : '필리핀',
+            가격 : 2500
+        };
+
+        console.log(product['품명']); // 배열처럼 사용
+        console.log(product.가격); // 클래스 속성처럼 사용
+
+        for (var i in product){
+            console.log(i + ' => ' + product[i]);
+        }
+
+        // this == 파이썬 self
+        let ironman = {
+            name : '토니 스타크',
+            proud : function(item){
+                console.log(this.name + '는 ' + item + '이 많습니다.');
+            }
+        };
+        ironman.proud('돈');
+    </script>
+</head>
+<body>
+
+</body>
+</html>

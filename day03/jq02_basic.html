@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>jQuery Basic</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let output = '';
+            for(var i = 0; i < 256; i++){
+                output += '<div></div>';
+            }
+            $('body').html(output); // == docuement.body.innerHTML = output;
+
+            $('div').css({
+                'height': '3px',
+                'background-color': function(i){
+                    return 'rgb(' + i + ',' + i + ',' + i + ')';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

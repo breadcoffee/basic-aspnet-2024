@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>JS DOM</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script> // 스크립트가 먼저 실행된 다음에 body가 실행됨
+        //alert('Wow');
+        // DOM 객체 접근시도
+        // CSS Background-color와 동일
+        /*
+            h1{
+                background-color: red;
+            }
+        */
+        document.querySelector('h1').style.backgroundColor = 'red';
+    </script>
+</head>
+<body>
+    <h1>Hello!</h1>
+    <h2>Welcome to HTML5</h2>
+
+    <script>
+        document.querySelector('h1').style.backgroundColor = 'red';
+        document.querySelector('h2').style.backgroundColor = 'blue';
+        document.querySelector('h1').style.color = document.querySelector('h2').style.color = 'brown';
+    </script>
+</body>
+</html>

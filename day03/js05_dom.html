@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>JS DOM</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        // 페이지가 모두 로드된 후 실행
+        window.onload = function(){
+            var output = '';
+            for (var i = 0; i < 256; i++){
+                output += '<div></div>';
+            }
+            // 필요시 주석해제!!!
+            //document.body.innerHTML = output;
+
+            var divs = document.querySelectorAll('div'); // div 태그 모두 선택
+            for(var i = 0; i < divs.length; i++){
+                var div = divs[i]; // 하나씩
+                div.style.height = '1px';
+                //div.style.backgroundColor = 'rgb(' + i + ',' + i + ',' + i +')';
+                div.style.backgroundColor = 'rgb(' + Math.floor(Math.random() * i) + ','
+                                                   + Math.floor(Math.random() * i) + ',' 
+                                                   + Math.floor(Math.random() * i) +')';
+            }
+
+            // 이미지 태그 조작
+            var image = document.getElementById('image');
+            image.width = 300;
+            image.height = 200;
+            image.src = 'https://via.placeholder.com/' + image.width + 'x' + image.height;
+
+            var mydiv = document.querySelector('div');
+            console.log(typeof(mydiv))
+            console.log(mydiv.getAttribute('data-role'));
+            console.log(mydiv.getAttribute('style'));
+            
+            mydiv.setAttribute('style', 'height: 5px; background-color:rgb(255,0,0);');
+
+            // clock 객체선택
+            let clock = document.getElementById('clock');
+            setInterval(function(){
+                var now = new Date();
+                clock.innerHTML = now.toString();
+            }, 1000); // 1초마다 화면 갱신
+        }
+    </script>
+</head>
+<body>
+    <img id="image">
+    <div data-role="test"></div>
+    <h2 id="clock">시계</h2>
+</body>
+</html>

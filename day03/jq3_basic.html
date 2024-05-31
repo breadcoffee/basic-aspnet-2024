@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>jQuery Basic</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#obj').css({
+                width: 100,
+                height: 100,
+                'background-color': 'orange'
+            }).on('mouseover', function(){
+                $(this).css('background-color', 'red');
+            }).on('mouseleave', function(){
+                $(this).css('background-color', 'orange');
+                $(this).css('border-radius', '0px');
+            }).on('click', function(){
+                $(this).css('background-color', 'blue');
+                $(this).css('border-radius', '50px');
+            });
+
+            // jQuery에는 js의 on을 빼고 이벤트를 구현할 수 있음
+            $('#push').click(function(){
+                alert('버튼을 클릭했습니다!!');
+            });
+
+            // jQuery의 강력한 기능
+            $('#toggle').on('click', function(){
+                // fadeToggle, hide, fadeout, slideToggle
+                // 사라지는 속도: fast, slow
+                //$('.page').fadeToggle('slow');
+                //$('.page').hide('slow');
+                //$('.page').fadeOut('fast');
+                $('.page').slideToggle('slow');
+            });
+
+            $('#box').css({
+                width: 100,
+                height: 100,
+                'background-color': 'coral'
+            }).animate({
+                width: 400,
+                opacity: 0.5, // 투명도
+            }, 2000).animate({
+                width: 100,
+                opacity: 1, // 투명도
+            }, 2000);
+        });
+    </script>
+    <style>
+        * { margin: 10px auto;}
+    </style>
+</head>
+<body>
+    <div id="obj"></div>
+    <button id="push">클릭</button>
+    <button id="toggle">토글</button>
+    <div class="page">
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis nobis aspernatur dicta qui voluptas animi officia error placeat, perferendis soluta nostrum! Unde, nam omnis? Nulla temporibus veritatis vero exercitationem atque.</p>
+    </div>
+    <div id="box"></div>
+</body>
+</html>
