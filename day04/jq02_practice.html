@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Sprite Animation</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        window.onload = function() {
+            var count = 0;
+            var image = document.getElementById('image');
+            var frames = ['0.png', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png']
+
+            setInterval(() => {
+                image.src = './images/' + frames[count % frames.length];
+                count += 1;
+            }, 1000/10); // 10FPS
+        }
+    </script>
+</head>
+<body>
+    <img id="image">
+</body>
+</html>

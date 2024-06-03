@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>jQuery 응용</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // javascript
+            var input1 = document.querySelectorAll('input')[0]; // 주민번호 입력창 앞자리
+            var input2 = document.querySelectorAll('input')[1]; // 주민번호 입력창 뒷자리
+
+            input1.onkeydown = function() {
+                if (input1.value.length >= 6){
+                    input2.focus();
+                }
+            } // 이것만 있을땐 여섯자리 문자열이 안지워짐
+
+            input2.onkeydown = function(event){
+                var event = event || window.event; // 지금 이벤트(키다운)와 윈도우 이벤트를 같이 확인
+                if (event.keyCode == 8 && input2.value.length == 0){
+                    input1.focus();
+                }
+            }
+
+            input1.focus();
+        })
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" maxlength="6">
+        <span>-</span>
+        <input type="text" maxlength="7"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
