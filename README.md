@@ -205,3 +205,6 @@ IoT 개발자과정 ASP.NET 리포지토리
     https://github.com/breadcoffee/basic-aspnet-2024/assets/146920372/e4a45d09-2edd-4b56-bce6-6eecee9b2381
 
         - Lun Dev 술라이더 애니메이션 이펙트 따라하기 
+
+    https://github.com/breadcoffee/basic-aspnet-2024/assets/146920372/88c54ee9-6f25-446a-99d7-803535713bdc
+
