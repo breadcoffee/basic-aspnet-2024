@@ -6,6 +6,7 @@
 }
 
 body {
+    position: fixed; /* 이거 안쓰면 리프레시때 위치 틀어짐 */
     width: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -76,7 +77,7 @@ body {
 
 .bg-slide .circle img {
     object-fit: cover;
-    transform: rotate(0deg) scale(2);
+    transform: rotate(0deg) scale(4.2);
     opacity: 0;
     transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1),
                 opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -92,6 +93,7 @@ body {
     opacity: 0;
 }
 
+/* 한 슬라이드당 이미지 3개, 그중 bg클래스만 딜레이 */
 .bg-slide.active .circle.bg img,
 .bg-slide.after-active .circle.bg img {
     transition-delay: 0.8s;
@@ -99,12 +101,12 @@ body {
 
 .bg-slide.active .circle.large img,
 .bg-slide.after-active .circle.large img {
-    transition-delay: 0.7s;
+    transition-delay: 0.5s;
 }
 
 .bg-slide.active .circle.small img,
-.bg-slide.after-active .circle.circle.small img {
-    transition-delay: 0.5s;
+.bg-slide.after-active .circle.small img {
+    transition-delay: 0.2s;
 }
 
 .circle-darktransp {
@@ -195,7 +197,7 @@ body {
 
 .rotate-btn {
     position: absolute;
-    bottom: 50px; right: 50px;
+    bottom: 50px; right: 100px;
     width: 60px; height: 60px;
     background-color: #aba72c;
     border: 2px solid white;
@@ -207,14 +209,29 @@ body {
     align-items: center; /* 세로 중앙정렬 */
 }
 
+.auto-btn {
+    position: absolute;
+    bottom: 50px; right: 30px;
+    width: 60px; height: 60px;
+    background-color: #aba72c;
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .rotate-btn.active {
     transform: rotate(360deg);
     pointer-events: none;
     transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition-delay: 0.2s;
+    transition-delay: 0.1s;
 }
 
-.rotate-btn i {
+.rotate-btn i 
+.auto-btn i {
     font-size:  40px;
     color: white;
 }
