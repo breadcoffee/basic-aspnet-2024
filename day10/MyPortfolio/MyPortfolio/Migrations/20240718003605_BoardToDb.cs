@@ -23,7 +23,7 @@ namespace MyPortfolio.Migrations
                     Contents = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Hit = table.Column<int>(type: "int", nullable: false),
                     RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModeDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

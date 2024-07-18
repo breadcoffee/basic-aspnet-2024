@@ -1,60 +1,48 @@
 ﻿@model MyPortfolio.Models.Board
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Board";
 }
 
-<h1>Details</h1>
+<section class="py-5">
+    <div class="container px-5">
+        <div>
+            <div class="row">
+                <div class="col text-center">
+                    <h3>@Html.DisplayFor(model => model.Title)</h3>
+                </div>
+            </div>
+            <div class="row px-2">
+                <div class="col-sm-3">@Html.DisplayFor(model => model.UserId) (@Html.DisplayFor(model => model.Name))</div>
+                <div class="col-sm-9 text-end">
+                    @Html.DisplayFor(model => model.RegDate) 작성<br />
+                    @Html.DisplayFor(model => model.ModDate) 최종수정<br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <hr/>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col">
+                    <div class="col">
+                        @Html.DisplayFor(model => model.Contents)<br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="px-2 p-2 text-end">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">
+                <i class="bi bi-pencil-fill"></i> 글 수정
+            </a>
+            <a asp-controller="Board" asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">
+                <i class="bi bi-eraser-fill"></i> 글 삭제
+            </a>
+            <a asp-controller="Board" asp-action="Index" class="btn btn-success">
+                <i class="bi bi-list"></i> 목록
+            </a>
+        </div>
+    </div>
+</section>
 
-<div>
-    <h4>Board</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Contents)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Contents)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Hit)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Hit)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RegDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModeDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModeDate)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>

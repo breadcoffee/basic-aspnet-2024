@@ -37,7 +37,7 @@ namespace MyPortfolio.Migrations
                     b.Property<int>("Hit")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModeDate")
+                    b.Property<DateTime>("ModDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")

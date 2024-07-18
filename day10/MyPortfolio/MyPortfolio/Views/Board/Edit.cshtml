@@ -1,63 +1,63 @@
 ﻿@model MyPortfolio.Models.Board
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Board";
 }
 
-<h1>Edit</h1>
+<section class="py-5">
+    <div class="container px-5">
+        <div class="row px-2">
+            <div class="col-md-5">
+                <!-- Submit 버튼 누르면 Pst 메서드가 발생-->
+                <form asp-controller="Board" asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>Board</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                    <div class="mb-3 row">
+                        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserId" class="control-label"></label>
+                        <input asp-for="UserId" class="form-control" />
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Contents" class="control-label"></label>
+                        <input asp-for="Contents" class="form-control" />
+                        <span asp-validation-for="Contents" class="text-danger"></span>
+                    </div>
+                    @* <div class="form-group">
+                    <label asp-for="Hit" class="control-label"></label>
+                    <input asp-for="Hit" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                    <label asp-for="RegDate" class="control-label"></label>
+                    <input asp-for="RegDate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                    <label asp-for="ModDate" class="control-label"></label>
+                    <input asp-for="ModDate" class="form-control" />
+                    </div> *@
+                    <!-- 화면에는 나오지 않지만 값을 들고 있음 -->
+                    <input asp-for="RegDate" type="hidden" />
+                    <input asp-for="ModDate" type="hidden" />
+                    <div class="form-group pt-3">
+                        <input type="submit" value="저장" class="btn btn-primary" />
+                         <a asp-controller="Board" asp-action="Index" class="btn btn-success">목록</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contents" class="control-label"></label>
-                <input asp-for="Contents" class="form-control" />
-                <span asp-validation-for="Contents" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Hit" class="control-label"></label>
-                <input asp-for="Hit" class="form-control" />
-                <span asp-validation-for="Hit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RegDate" class="control-label"></label>
-                <input asp-for="RegDate" class="form-control" />
-                <span asp-validation-for="RegDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModeDate" class="control-label"></label>
-                <input asp-for="ModeDate" class="form-control" />
-                <span asp-validation-for="ModeDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
