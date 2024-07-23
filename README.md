@@ -414,7 +414,7 @@ https://github.com/user-attachments/assets/5df3775f-d041-46ec-9176-a3e14493ea6b
         - NuGet패키지 WestwindAspNetCore.MarkDown 검색
         
         <img src="https://raw.githubusercontent.com/breadcoffee/basic-aspnet-2024/main/images/an005.png" width="730" alt="html 에디터">
-
+        
 ## 12일차
 - ASP.NET Core 포트폴리오 웹사이트, MyPortfolio
     1. 삭제 로직 수정
