@@ -31,21 +31,10 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Contents" class="control-label"></label>
-                        <input asp-for="Contents" class="form-control" />
+                        <!-- textarea는 여는태그와 닫는태그를 모두 사용해야함-->
+                        <textarea asp-for="Contents" class="form-control" rows="10"></textarea>
                         <span asp-validation-for="Contents" class="text-danger"></span>
                     </div>
-                    @* <div class="form-group">
-                        <label asp-for="Hit" class="control-label"></label>
-                        <input asp-for="Hit" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="RegDate" class="control-label"></label>
-                        <input asp-for="RegDate" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ModDate" class="control-label"></label>
-                        <input asp-for="ModDate" class="form-control" />
-                    </div> *@
                     <div class="form-group pt-3">
                         <input type="submit" value="저장" class="btn btn-primary"/>
                         <a asp-controller="Board" asp-action="Index" class="btn btn-success">목록</a>
@@ -56,7 +45,8 @@
     </div>
 </section>
 
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        var simplemde = new SimpleMDE({ Element: document.getElementById("Contents") });
+    </script>
 }

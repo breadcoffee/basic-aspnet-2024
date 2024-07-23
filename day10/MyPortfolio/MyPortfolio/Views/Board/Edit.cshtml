@@ -31,21 +31,9 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Contents" class="control-label"></label>
-                        <input asp-for="Contents" class="form-control" />
+                        <textarea asp-for="Contents" class="form-control" rows="10"></textarea>
                         <span asp-validation-for="Contents" class="text-danger"></span>
                     </div>
-                    @* <div class="form-group">
-                    <label asp-for="Hit" class="control-label"></label>
-                    <input asp-for="Hit" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                    <label asp-for="RegDate" class="control-label"></label>
-                    <input asp-for="RegDate" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                    <label asp-for="ModDate" class="control-label"></label>
-                    <input asp-for="ModDate" class="form-control" />
-                    </div> *@
                     <!-- 화면에는 나오지 않지만 값을 들고 있음 -->
                     <input asp-for="RegDate" type="hidden" />
                     <input asp-for="ModDate" type="hidden" />
@@ -60,5 +48,7 @@
 </section>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        var simplemde = new SimpleMDE({ Element: document.getElementById("Contents") });
+    </script>
 }

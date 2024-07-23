@@ -1,59 +1,82 @@
 ﻿@model IEnumerable<MyPortfolio.Models.Board>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Board";
 }
 
-<
+@{
+    // BoardController / Index 액션메서드에서 넘어온 값
+    var startPage = ViewBag.StartPage;
+    var endPage = ViewBag.EndPage;
+    var page = ViewBag.Page;
+    var totalPage = ViewBag.TotalPage;
+
+    var num = ViewBag.TotalCount - ((page - 1) * 10);   // 전체 게시글 수를 (현재페이지 - 1)값과 페이지당 게시글 수 곱을 빼기
+}
+
 <style>
     a {
-      color: black;
-      text-decoration: none; /* 마우스가 내려가면 밑줄해제 */
+        color: black;
+        text-decoration: none; /* 마우스가 내려가면 밑줄해제 */
+    }
 
-    }
-    a:hover {
-      text-decoration: underline; /*마우스가 올라가면 밑줄 */
-    }
+        a:hover {
+            text-decoration: underline; /*마우스가 올라가면 밑줄 */
+        }
 </style>
 
 <section class="py-5">
     <div class="container px-5">
-        <p>
-            <a asp-controller="Board" asp-action="Create" class="btn btn-primary">
-                <i class="bi bi-file-earmark-plus-fill"></i>&nbsp;글 작성
+        <div class="row justify-content-between p-2">
+            <div class="col-3">
+                <a asp-controller="Board" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-file-earmark-plus-fill"></i>&nbsp;글 작성
                 </a>
-        </p>
+            </div>
+            <div class="col-9 text-end">
+                <form asp-action="Index" method="GET">
+                    <input id="Search" name="search" value="@ViewBag.Search" class="form-control-sm" />
+                    <button type="submit" class="btn btn-success">검색</button>
+                </form>
+            </div>
+        </div>
         <table class="table table-light table-striped">
             <thead>
                 <tr class="table-primary">
+                    <th style="width:4rem;">
+                        번호
+                    </th>
                     <th style="width:7rem;">
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th style="width:7rem;">
                         @Html.DisplayNameFor(model => model.UserId)
-                    </t>
+                        </t>
                     <th style="width:17rem;">
-                        @Html.DisplayNameFor(model => model.Title)
+                            @Html.DisplayNameFor(model => model.Title)
                     </th>
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.Contents)
+                        @* <th>
+                    @Html.DisplayNameFor(model => model.Contents)
                     </th> *@
                     <th style="width:5rem;">
-                        @Html.DisplayNameFor(model => model.Hit)
+                            @Html.DisplayNameFor(model => model.Hit)
                     </th>
                     <th style="width:7rem;">
-                        @Html.DisplayNameFor(model => model.RegDate)
+                            @Html.DisplayNameFor(model => model.RegDate)
                     </th>
                     <th style="width:7rem;">
-                        @Html.DisplayNameFor(model => model.ModDate)
+                            @Html.DisplayNameFor(model => model.ModDate)
                     </th>
-                    @* <th></th> *@
+                        @* <th></th> *@
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td>
+                            @(num--)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
@@ -66,8 +89,8 @@
                             </a>
                         </td>
                         @* <td>
-                            @Html.DisplayFor(modelItem => item.Contents)
-                        </td> *@
+                    @Html.DisplayFor(modelItem => item.Contents)
+                    </td> *@
                         <td class="text-end pe-5">
                             @Html.DisplayFor(modelItem => item.Hit)
                         </td>
@@ -77,19 +100,88 @@
                         </td>
                         <td>
                             @* @Html.DisplayFor(modelItem => item.ModDate) *@
-                            @if(item.ModDate != null)
+                            @if (item.ModDate != null)
                             {
                                 @Convert.ToDateTime(item.ModDate).ToString("yyyy-MM-dd")
                             }
                         </td>
                         @* <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td> *@
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td> *@
                     </tr>
                 }
             </tbody>
         </table>
+
+        <!-- 페이징컨트롤 -->
+        <nav class="text-center">
+            <ul class="pagination justify-content-center">
+                @if (startPage > 1) // 맨 첫번째 페이지
+                {
+                    <li class="page-item">
+                        <a href="?page=1&search=@ViewBag.Search" class="page-link"> ≪ </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link"> ≪ </span>
+                    </li>
+                }
+                @if (page > 1) // 이전 페이지 버튼
+                {
+                    <li class="page-item">
+                        <a href="?page=@(page-1)&search=@ViewBag.Search" class="page-link"> ＜ </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link"> ＜ </span>
+                    </li>
+                }
+                @for (var i = startPage; i <= endPage; i++) // 페이지 번호 반복출력
+                {
+                    if (i == page)
+                    {
+                        <li class="page-item">
+                            <span class="page-link active">@i</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a href="?page=@i&search=@ViewBag.Search" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+                @if (page < totalPage)
+                {
+                    <li class="page-item">
+                        <a href="?page=@(page+1)&search=@ViewBag.Search" class="page-link"> ＞ </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link"> ＞ </span>
+                    </li>
+                }
+                @if (endPage < totalPage)
+                {
+                    <li class="page-item">
+                        <a href="?page=@totalPage&search=@ViewBag.Search" class="page-link"> ≫ </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link"> ≫ </span>
+                    </li>
+                }
+            </ul>
+        </nav>
     </div>
 </section>
