@@ -402,7 +402,7 @@ IoT 개발자과정 ASP.NET 리포지토리
         - html 링크에 ?page=1&search=검색어 추가
     
 
-https://github.com/user-attachments/assets/5df3775f-d041-46ec-9176-a3e14493ea6b
+    https://github.com/user-attachments/assets/5df3775f-d041-46ec-9176-a3e14493ea6b
 
 
     6. HTML 에디터
