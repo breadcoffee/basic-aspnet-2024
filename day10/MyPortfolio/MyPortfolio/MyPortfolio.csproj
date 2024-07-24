@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\sign-in.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\assets\cv.ico" />
     <None Include="wwwroot\assets\favicon.ico" />
     <None Include="wwwroot\assets\profile.png" />

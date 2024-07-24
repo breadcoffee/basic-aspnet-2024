@@ -418,5 +418,30 @@ IoT 개발자과정 ASP.NET 리포지토리
 ## 12일차
 - ASP.NET Core 포트폴리오 웹사이트, MyPortfolio
     1. 삭제 로직 수정
-    2. 회원가입, 로그인...
+        1. BoardController.cs 사용 X -> BoardRestController.cs 다시 생성
+        2. /Views/Details.cshtml jQuery를 작업 팝업
+        3. /Board/Index로 화면 전환
+
+    2. 회원가입, 로그인, 권한?...
+        1. /Models/User.cs 클래스 생성
+        2. User클래스와 Board 클래스간 관계형성 (virtual)
+        3. AppDbContext.cs에 User DBset 추가
+        4. Add-Migration, Update-Database 실행 -> DB 생성
+        5. Program.cs 로그인 세션 설정
+        6. _layout.cshtml 로그인/로그아웃 메뉴 추가
+        7. HomeController.cs Login/Logout 액션메서드 작성
+        8. Login() 액션메서드 마우스 오른쪽 버튼 뷰생성 Login.cshtml
+        9. bootstrap 사이트에서 예제 파일 다운로드
+        10. sing-in 폴더 내 index.html. sign-in.css Static경로(wwwroot) 복사
+        11. Login.cshtml을 위의 파일 참조해서 수정
+        12. HomeController.cs에 Register() 액션메서드 작성
+        13. Register.cshtml 회원가입 페이지 생성
+
+## 13일차
+- ASP.NET Core 포트폴리오 웹사이트, MyPortfolio
+    1. 회원가입 계속...
+    2. 이력서, 프로젝트, 컨텍트 페이지 구현하기
     3. 관리자모드/페이지
+    4. 자신 컴퓨터 IIS 서버에 웹사이트 올리기
+    5. AWS 라이트 세일로 웹사이트 공개하기
+    6. 부트스트랩 템플릿 커스터마이징, 본인 포트폴리오 사이트 만들기

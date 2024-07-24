@@ -7,15 +7,15 @@
     <meta name="description" content="" />
     <title>@ViewData["Title"] - Zoo's Portfolio</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="~/assets/cv.ico"/>
+    <link rel="icon" type="image/x-icon" href="~/assets/cv.ico" />
     <!-- Custom Google font, 한글 폰트로 변경-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
     <!-- Bootstrap icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link rel="stylesheet" href="~/css/styles.css"/>
+    <link rel="stylesheet" href="~/css/styles.css" />
 
     <!-- SimpleMDE css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
@@ -25,52 +25,60 @@
     <link rel="stylesheet" href="~/MyPortfolio.styles.css" asp-append-version="true" /> *@
 </head>
 <body class="d-flex flex-column h-100">
-        <main class="flex-shrink-0">
-            <!-- Navigation 공통메뉴 -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="/"><span class="fw-bolder text-primary">Zoo's Portfolio</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">HOME</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Resume" asp-action="Index">RESUME</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Project" asp-action="Index">PROJECT</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Board" asp-action="Index">BOARD</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">CONTACT</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- 메인 컨텍스트 / 페이지마다 변경될 부분 -->
-            <div>
-                @RenderBody()
-            </div>
-        </main>
-        <!-- Footer-->
-        <footer class="bg-white py-4 mt-auto">
+    <main class="flex-shrink-0">
+        <!-- Navigation 공통메뉴 -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
             <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0">Copyright &copy; localhost 2024</div></div>
-                    <div class="col-auto">
-                        <a class="small" href="#!">Privacy</a>
-                        <span class="mx-1">&middot;</span>
-                        <a class="small" href="#!">Terms</a>
-                        <span class="mx-1">&middot;</span>
-                        <a class="small" href="#!">Contact</a>
-                    </div>
+                <a class="navbar-brand" href="/"><span class="fw-bolder text-primary">Zoo's Portfolio</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Resume" asp-action="Index">RESUME</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Project" asp-action="Index">PROJECT</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Board" asp-action="Index">BOARD</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">CONTACT</a></li>
+                        @if (Context.Session.GetInt32("USER_LOGIN_KEY") == null) // 로그인 되어있지 않다면
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">LOGIN</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Logout">LOGOUT</a></li>
+                        }
+                    </ul>
                 </div>
             </div>
-        </footer>
-        <!-- jQuery 추가 -->
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="~/js/scripts.js"></script>
-        <!-- SimpleMDE js CDN -->
-        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-        <!-- ASP.NET Core에 페이지에 들어가는 스크립트 영역 -->
-        @await RenderSectionAsync("Scripts", required: false)
-    </body>
+        </nav>
+        <!-- 메인 컨텍스트 / 페이지마다 변경될 부분 -->
+        <div>
+            @RenderBody()
+        </div>
+    </main>
+    <!-- Footer-->
+    <footer class="bg-white py-4 mt-auto">
+        <div class="container px-5">
+            <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                <div class="col-auto"><div class="small m-0">Copyright &copy; localhost 2024</div></div>
+                <div class="col-auto">
+                    <a class="small" href="#!">Privacy</a>
+                    <span class="mx-1">&middot;</span>
+                    <a class="small" href="#!">Terms</a>
+                    <span class="mx-1">&middot;</span>
+                    <a class="small" href="#!">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery 추가 -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="~/js/scripts.js"></script>
+    <!-- SimpleMDE js CDN -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!-- ASP.NET Core에 페이지에 들어가는 스크립트 영역 -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>
