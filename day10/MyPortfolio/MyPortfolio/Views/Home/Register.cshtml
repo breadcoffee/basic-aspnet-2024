@@ -20,21 +20,22 @@
     <div class="row g-5">
         <div class="col">
             <h4 class="mb-3">기본입력사항</h4>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" asp-controller="Home" asp-action="Register" novalidate>
                 <div class="row g-3">
                     <div class="col-12">
-                        <label for="email" class="form-label">이메일 주소</label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                        <label asp-for="UserEmail" class="form-label">이메일 주소(아이디로 사용)</label>
+                        @* input 캐그의 asp-for는 HTML로 렌더링된 뒤 id=와 name=으로 변환됨 *@
+                        <input type="email" class="form-control" asp-for="UserEmail" placeholder="you@example.com" required>
                         <div class="invalid-feedback">
                             이메일 주소는 필수입니다.
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="UserName" class="form-label">사용자명</label>
+                        <label asp-for="UserName" class="form-label">사용자명</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text">＠</span>
-                            <input type="text" class="form-control" id="UserName" placeholder="홍길동" required>
+                            <input type="text" class="form-control" asp-for="UserName" placeholder="홍길동" required>
                             <div class="invalid-feedback">
                                 사용자명은 필수입니다.
                             </div>
@@ -42,29 +43,30 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="address" class="form-label">주소<span class="text-body-secondary">(옵션)</span></label>
-                        <input type="text" class="form-control" id="address" placeholder="서울시 도봉구">
+                        <label asp-for="Address" class="form-label">주소<span class="text-body-secondary">(옵션)</span></label>
+                        <input type="text" class="form-control" asp-for="Address" placeholder="서울시 도봉구">
                     </div>
 
                     <div class="col-12">
-                        <label for="PhoneNum" class="form-label">전화번호<span class="text-body-secondary">(옵션)</span></label>
-                        <input type="text" class="form-control" id="PhoneNum" placeholder="010-1234-1234">
+                        <label asp-for="PhoneNum" class="form-label">전화번호<span class="text-body-secondary">(옵션)</span></label>
+                        <input type="text" class="form-control" asp-for="PhoneNum" placeholder="010-1234-1234">
                     </div>
 
                     <div class="col-12">
-                        <label for="Password" class="form-label">비밀번호</label>
-                        <input type="password" class="form-control" id="Password" required>
+                        <label asp-for="Password" class="form-label">비밀번호</label>
+                        <input type="password" class="form-control" asp-for="Password" placeholder="특수문자 1개 이상, 숫자, 영문자포함 8자 이상" required>
                         <div class="invalid-feedback">
                             비밀번호는 필수입니다.
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="PasswordCheck" class="form-label">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="PasswordCheck" required>
+                        <label asp-for="PasswordCheck" class="form-label">비밀번호 확인</label>
+                        <input type="password" class="form-control" asp-for="PasswordCheck" required>
                         <div class="invalid-feedback">
                             비밀번호 확인은 필수입니다.
                         </div>
+                        <span asp-validation-for="PasswordCheck" class="text-danger"></span>
                     </div>
                 </div>
 

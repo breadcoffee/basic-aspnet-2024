@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Azure.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyPortfolio.Models
@@ -7,15 +8,16 @@ namespace MyPortfolio.Models
     {
         [Key]
         public int Id { get; set; } // PK
-        [Required(ErrorMessage = "이름은 필수입니다")]
-        [MaxLength(50)]     // NAVRCHAR(50) 사이즈 지정하려면
-        [DisplayName("이름")]
-        public string Name { get; set; } // 작성자명
 
-        [Required(ErrorMessage = "아이디는 필수입니다")]
-        [MaxLength(20)]
-        [DisplayName("아이디")]
-        public string UserId { get; set; }  // 작성자 아이디
+        //[Required(ErrorMessage = "이름은 필수입니다")]
+        //[MaxLength(50)]     // NAVRCHAR(50) 사이즈 지정하려면
+        //[DisplayName("이름")]
+        //public string Name { get; set; } // 작성자명
+
+        //[Required(ErrorMessage = "아이디는 필수입니다")]
+        //[MaxLength(20)]
+        //[DisplayName("아이디")]
+        //public string UserId { get; set; }  // 작성자 아이디
         
         [Required(ErrorMessage = "제목은 필수입니다")]
         [MaxLength(250)]
@@ -36,6 +38,9 @@ namespace MyPortfolio.Models
         public DateTime? ModDate { get; set; }  // 게시글 최종 수정일자
 
         // RelationShip 부모User -> 자식Board
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
+
+        [DisplayName("작성자명")]
+        public virtual string? UserName { get; set; }
     }
 }

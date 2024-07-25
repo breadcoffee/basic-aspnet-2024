@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="row px-2">
-                <div class="col-sm-3">@Html.DisplayFor(model => model.UserId) (@Html.DisplayFor(model => model.Name))</div>
+                <div class="col-sm-3">@Html.DisplayFor(model => model.UserName)</div>
                 <div class="col-sm-9 text-end">
                     @Html.DisplayFor(model => model.RegDate) 작성<br />
                     @Html.DisplayFor(model => model.ModDate) 최종수정<br />
@@ -35,17 +35,26 @@
             </div>
         </div>
         <div class="px-2 p-2 text-end">
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">
-                <i class="bi bi-pencil-fill"></i> 글 수정
-            </a>
+            @if (Context.Session.GetInt32("USER_LOGIN_KEY") != null)
+            {
+                @if (Context.Session.GetString("USER_EMAIL") == @Model?.User?.UserEmail)
+                {
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">
+                        <i class="bi bi-pencil-fill"></i> 글 수정
+                    </a>
+
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delModal">글 삭제</button>
+                }
+            }
+            
             @* <a asp-controller="Board" asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">
                 <i class="bi bi-eraser-fill"></i> 글 삭제
             </a> *@
-            <a class="btn btn-danger" id="btnDelete">
+            @* <a class="btn btn-danger" id="btnDelete">
                 <i class="bi bi-eraser-fill"></i> 글 삭제
-            </a>
+            </a> *@
 
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#delModal">글 삭제</button>
+            
 
             <a asp-controller="Board" asp-action="Index" class="btn btn-success">
                 <i class="bi bi-list"></i> 목록
