@@ -437,6 +437,8 @@ IoT 개발자과정 ASP.NET 리포지토리
         12. HomeController.cs에 Register() 액션메서드 작성
         13. Register.cshtml 회원가입 페이지 생성
 
+        https://github.com/user-attachments/assets/9c0330f8-0301-4286-a3e2-3ed651c6539a
+
 ## 13일차
 - ASP.NET Core 포트폴리오 웹사이트, MyPortfolio
     1. 회원가입 계속...
