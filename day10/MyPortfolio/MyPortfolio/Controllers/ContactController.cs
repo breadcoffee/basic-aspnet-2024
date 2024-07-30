@@ -9,6 +9,12 @@ namespace MyPortfolio.Controllers
         // GET: ContactController
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SendMail()
+        {
             try
             {
                 MailMessage mailMessage = new MailMessage();
@@ -48,7 +54,8 @@ namespace MyPortfolio.Controllers
             {
                 // 에러메시지 HTML
             }
-            return View();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
