@@ -118,9 +118,20 @@ namespace MyPortfolio.Controllers
             return View(user);
         }
 
+        [HttpGet]
         public IActionResult Project()
         {
-            return View();
+            // DB Project 테이블 내용을 리스트로 받아서 뷰로 전달
+            var list = _context.Project.ToList();
+
+            foreach (var item in list)
+            {
+                item.FilePath = item.FilePath.Replace("\\", "/");
+                var index = item.FilePath.IndexOf("uploads");
+                var finalPath = item.FilePath.Substring(index-1);
+                item.FilePath = finalPath;
+            }
+            return View(list);
         }
     }
 }

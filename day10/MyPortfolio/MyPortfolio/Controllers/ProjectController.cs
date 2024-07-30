@@ -58,10 +58,28 @@ namespace MyPortfolio.Controllers
         {
             if (ModelState.IsValid)
             {
+                var fileUrl = ""; // if (ModelState.IsValid)에 포함되는 지역변수로 변경
                 if (FilePath != null && FilePath.Length > 0)
                 {
-                    var fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", FilePath.FileName);
+                    //var fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", FilePath.FileName);
+
+                    // 이미지 파일 이름이 중복되지 않도록 랜덤으로 변경
+                    var newFileName = "Mp_" + DateTime.Now.ToString("yyMMdd_HHmmssfff");
+
+                    var extension = System.IO.Path.GetExtension(FilePath.FileName);
+
+                    // FileStream으로 위 경로에 파일 저장
+                    fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", newFileName + extension);
+
+                    //버퍼 사용
+                    using (var stream = System.IO.File.Create(fileUrl))
+                    {
+                        await FilePath.CopyToAsync(stream);
+                    }
                 }
+
+                // 새로 변경된 이미지파일 경로를 Project 객체에 할당
+                project.FilePath = fileUrl;
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -90,7 +108,7 @@ namespace MyPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectName,Description,FilePath")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectName,Description")] Project project, IFormFile FilePath)
         {
             if (id != project.Id)
             {
@@ -99,8 +117,27 @@ namespace MyPortfolio.Controllers
 
             if (ModelState.IsValid)
             {
+                var fileUrl = "";
                 try
                 {
+                    if (FilePath != null && FilePath.Length > 0)
+                    {
+                        //var fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", FilePath.FileName);
+
+                        // 이미지 파일 이름이 중복되지 않도록 랜덤으로 변경
+                        var newFileName = "Mp_" + DateTime.Now.ToString("yyMMdd_HHmmssfff");
+
+                        var extension = System.IO.Path.GetExtension(FilePath.FileName);
+
+                        // FileStream으로 위 경로에 파일 저장
+                        fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", newFileName + extension);
+
+                        //버퍼 사용
+                        using (var stream = System.IO.File.Create(fileUrl))
+                        {
+                            await FilePath.CopyToAsync(stream);
+                        }
+                    }
                     _context.Update(project);
                     await _context.SaveChangesAsync();
                 }

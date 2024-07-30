@@ -9,12 +9,12 @@ namespace MyPortfolio.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength (30)]
+        [MaxLength (100)]
         [DisplayName("프로젝트명")]
         public string ProjectName { get; set; }
 
         [Required]
-        [MaxLength (70)]
+        [MaxLength (300)]
         [DisplayName("프로젝트설명")]
         public string Description { get; set; }
 

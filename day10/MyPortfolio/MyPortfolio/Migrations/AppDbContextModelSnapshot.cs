@@ -72,7 +72,7 @@ namespace MyPortfolio.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("FilePath")
                         .IsRequired()
@@ -81,7 +81,7 @@ namespace MyPortfolio.Migrations
                     b.Property<string>("ProjectName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
