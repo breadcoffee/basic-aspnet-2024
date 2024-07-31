@@ -695,3 +695,13 @@ IoT 개발자과정 ASP.NET 리포지토리
         - https://startbootstrap.com/
         - https://themewagon.com/themes/
         - https://getbootstrap.com/docs/5.0/examples/
+
+## 16일차
+- ASP.NET Core 포트폴리오 웹사이트, MyPortfolio
+    1. 부트스트랩 템플릿 커스터마이징, 본인 포트폴리오 사이트 만들기
+        - Resume 항목 추가 완료, 이력서 다운로드 가능
+        - 프로젝트 항목 추가
+        - 프로젝트 Edit 수정, 프로젝트 내용 추가 시 HTML 태크 사용가능
+    2. Resume 위치 수정 및 조절
+    3. Contact 수정
+    4. AWS FTP 서버 작동안됨 수정 후 수정한 코드 게시
