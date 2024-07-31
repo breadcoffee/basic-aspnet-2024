@@ -14,7 +14,7 @@ namespace MyPortfolio.Models
         public string ProjectName { get; set; }
 
         [Required]
-        [MaxLength (300)]
+        [MaxLength(800)]
         [DisplayName("프로젝트설명")]
         public string Description { get; set; }
 

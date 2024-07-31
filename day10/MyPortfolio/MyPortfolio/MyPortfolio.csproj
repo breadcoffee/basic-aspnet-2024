@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="Views\_Notification.cshtml" />
+    <Content Remove="wwwroot\assets\[이력서]입사지원서-이주원.docx" />
     <Content Remove="wwwroot\sign-in.html" />
   </ItemGroup>
 

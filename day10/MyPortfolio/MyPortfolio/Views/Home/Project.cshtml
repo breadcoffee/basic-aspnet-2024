@@ -18,12 +18,12 @@
                         <div class="card-body p-0">
                             <div class="d-flex justify-content-between">
                                 <div class="p-5">
-                                    <h2 class="fw-bolder">@item.ProjectName</h2>
+                                    <h3 class="fw-bolder">@item.ProjectName</h3>
                                     <p>
-                                        @item.Description
+                                        @Html.Raw(@item.Description)
                                     </p>
                                 </div>
-                                <img class="img-fluid" src="@item.FilePath" height="400" width="300" />
+                                <img class="img-fluid" src="@item.FilePath" width="400" />
                             </div>
                         </div>
                     </div>

@@ -126,9 +126,7 @@ namespace MyPortfolio.Controllers
 
             foreach (var item in list)
             {
-                item.FilePath = item.FilePath.Replace("\\", "/");
-                var index = item.FilePath.IndexOf("uploads");
-                var finalPath = item.FilePath.Substring(index-1);
+                var finalPath = "/uploads/" + item.FilePath;
                 item.FilePath = finalPath;
             }
             return View(list);
