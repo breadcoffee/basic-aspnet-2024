@@ -104,9 +104,9 @@ namespace MyPortfolio.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            if(HttpContext.Session.GetInt32("USER_LOGIN_KEY") == null)
+            if (HttpContext.Session.GetInt32("USER_LOGIN_KEY") == null)
             {
-                // 로그인을 안했으니 로그인 창으로 가라
+                // 로그인을 안했으니 로그인창으로 가라
                 return RedirectToAction("Login");
             }
 
@@ -120,7 +120,7 @@ namespace MyPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Contents,Hit,RegDate,ModeDate")] Board board)
+        public async Task<IActionResult> Create([Bind("Id,Title,Contents,Hit,RegDate,ModDate")] Board board)
         {
             // 아무값도 입력하지 않으면 ModelState.IsValid는 false
             if (ModelState.IsValid)
@@ -130,15 +130,16 @@ namespace MyPortfolio.Controllers
 
                 if (currUser == null)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index"); //
                 }
 
-                board.User = currUser;  // 현재 로그인한 사용자를 할당
+                board.User = currUser; // 현재 로그인한 사용자를 할당
                 board.RegDate = DateTime.Now;
-
-                _context.Add(board); // DB 객체에 저장
-                // Insert to Commit 데이터베이스 커밋
+                _context.Add(board); // DB객체에 저장
+                // DB Insert 후 Commit 실행
                 await _context.SaveChangesAsync();
+
+                TempData["success"] = "성공적으로 저장했습니다.";
                 // 게시판 목록화면으로 돌아감
                 return RedirectToAction(nameof(Index));
             }
@@ -166,7 +167,7 @@ namespace MyPortfolio.Controllers
             {
                 return NotFound();
             }
-            return View(board);
+            return View(board); // Edit.cshtml을 출력하라.
         }
 
         // POST: Board/Edit/5

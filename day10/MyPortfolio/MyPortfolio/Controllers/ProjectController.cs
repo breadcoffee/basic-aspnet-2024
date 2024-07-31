@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using MyPortfolio.Data;
 using MyPortfolio.Models;
 
@@ -14,9 +15,13 @@ namespace MyPortfolio.Controllers
     {
         private readonly AppDbContext _context;
 
-        public ProjectController(AppDbContext context)
+        // 파일 업로드 웹환경 
+        private readonly IWebHostEnvironment _environment;
+
+        public ProjectController(AppDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Project
@@ -54,53 +59,51 @@ namespace MyPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProjectName,Description")] Project project, IFormFile FilePath)
+        public async Task<IActionResult> Create(TempProject temp)
         {
             if (ModelState.IsValid)
             {
-                var fileUrl = ""; // if (ModelState.IsValid)에 포함되는 지역변수로 변경
-                if (FilePath != null && FilePath.Length > 0)
+                // 파일 업로드
+                string upFileName = UploadImageFile(temp);
+
+                // 파일명을 받아서 TempProject 내용을 Project로 이전
+                Project project = new Project
                 {
-                    //var fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", FilePath.FileName);
+                    ProjectName = temp.ProjectName,
+                    Description = temp.Description,
+                    FilePath = upFileName,
+                };
 
-                    // 이미지 파일 이름이 중복되지 않도록 랜덤으로 변경
-                    var newFileName = "Mp_" + DateTime.Now.ToString("yyMMdd_HHmmssfff");
-
-                    var extension = System.IO.Path.GetExtension(FilePath.FileName);
-
-                    // FileStream으로 위 경로에 파일 저장
-                    fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", newFileName + extension);
-
-                    //버퍼 사용
-                    using (var stream = System.IO.File.Create(fileUrl))
-                    {
-                        await FilePath.CopyToAsync(stream);
-                    }
-                }
-
-                // 새로 변경된 이미지파일 경로를 Project 객체에 할당
-                project.FilePath = fileUrl;
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(temp);
         }
+
 
         // GET: Project/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) { return NotFound(); }
 
             var project = await _context.Project.FindAsync(id);
             if (project == null)
             {
                 return NotFound();
             }
-            return View(project);
+
+            // 이미지 때문에 추가작업
+            TempProject temp = new TempProject
+            {
+                Id = project.Id,
+                ProjectName = project.ProjectName,
+                Description = project.Description,
+                FilePath = project.FilePath,
+            };
+
+            return View(temp);
         }
 
         // POST: Project/Edit/5
@@ -108,42 +111,37 @@ namespace MyPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProjectName,Description")] Project project, IFormFile FilePath)
+        public async Task<IActionResult> Edit(TempProject temp)
         {
-            if (id != project.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                var fileUrl = "";
+                // 파일 업로드
+                string upFileName = UploadImageFile(temp);
+
+                // 새로 업로드된 파일이 없고, 이전 파일명이 있으면
+                // 그 파일명을 그대 사용!!!
+                if (upFileName == string.Empty && temp.FilePath != string.Empty)
+                {
+                    upFileName = temp.FilePath;
+                }
+
                 try
                 {
-                    if (FilePath != null && FilePath.Length > 0)
+                    // 파일명을 받아서 TempProject 내용을 Project로 이전
+                    Project project = new Project
                     {
-                        //var fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", FilePath.FileName);
+                        Id = temp.Id,
+                        ProjectName = temp.ProjectName,
+                        Description = temp.Description,
+                        FilePath = upFileName,
+                    };
 
-                        // 이미지 파일 이름이 중복되지 않도록 랜덤으로 변경
-                        var newFileName = "Mp_" + DateTime.Now.ToString("yyMMdd_HHmmssfff");
-
-                        var extension = System.IO.Path.GetExtension(FilePath.FileName);
-
-                        // FileStream으로 위 경로에 파일 저장
-                        fileUrl = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", newFileName + extension);
-
-                        //버퍼 사용
-                        using (var stream = System.IO.File.Create(fileUrl))
-                        {
-                            await FilePath.CopyToAsync(stream);
-                        }
-                    }
                     _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectExists(project.Id))
+                    if (!ProjectExists(temp.Id))
                     {
                         return NotFound();
                     }
@@ -154,7 +152,7 @@ namespace MyPortfolio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(project);
+            return View(temp);
         }
 
         // GET: Project/Delete/5
@@ -194,5 +192,33 @@ namespace MyPortfolio.Controllers
         {
             return _context.Project.Any(e => e.Id == id);
         }
+
+        #region `업로드메서드 - Routing에 관련없음`
+
+        /// <summary>
+        /// 파일업로드 메서드!!
+        /// </summary>
+        /// <param name="temp"></param>
+        /// <returns></returns>
+        private string UploadImageFile(TempProject temp)
+        {
+            var resultFileName = string.Empty;
+
+            if (temp.ProjectImage != null)
+            {
+                string uploadFolder = Path.Combine(_environment.WebRootPath, "uploads");
+                resultFileName = Guid.NewGuid() + "_" + temp.ProjectImage.FileName;
+                string filePath = Path.Combine(uploadFolder, resultFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    temp.ProjectImage.CopyTo(fileStream);
+                }
+            }
+
+            return resultFileName;
+        }
+
+        #endregion
     }
 }

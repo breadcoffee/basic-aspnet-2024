@@ -642,8 +642,55 @@ IoT 개발자과정 ASP.NET 리포지토리
                 // 에러메시지 HTML
             }
         ```
+    4. Tostar 사용
+        - https://github.com/CodeSeven/toastr 사용
+        - _Layout.cshtml에 css CDN 추가
+        - Partial View 생성 - 부분뷰로 /Views/Shared/_Notification.cshtml 생성
+        - 아래와 같이 작성
 
-    4. 부트스트랩 템플릿 커스터마이징, 본인 포트폴리오 사이트 만들기
+        ```cs
+            @if (TempData["success"] != null) {
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                <script type="text/javascript">
+                    // toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+                    toastr.success('@TempData["success"]');
+                </script>
+            }
+
+                @if (TempData["error"] != null) {
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                <script type="text/javascript">
+                    // toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
+                    toastr.error('@TempData["error"]');
+                </script>
+                <h3>@TempData["error"]</h3>
+            }
+        ```
+
+        - /Views/Board/Index.cshtml에 아래의 코드 추가
+
+        ```cs
+                var num = ViewBag.TotalCount - ((page - 1) * 10); // 전체 게시글 수를 (현재페이지-1)값과 페이지당 게시글수 곱을 빼기
+            }
+
+            <partial name="_Notification" />
+        ```
+
+        - /BoardController.cs Create() Post 메서드에 아래의 코드 추가
+
+        ```cs
+            await _context.SaveChangesAsync();
+            // 이 부분 추가
+            TempData["success"] = "성공적으로 저장했습니다.";
+        ```
+
+        - 실행결과
+
+        <img src="https://raw.githubusercontent.com/breadcoffee/basic-aspnet-2024/main/images/an009.png" width="730" alt="토스트창 확인">
+
+    5. 부트스트랩 템플릿 커스터마이징, 본인 포트폴리오 사이트 만들기
         - https://bootstraptaste.com/
         - https://startbootstrap.com/
         - https://themewagon.com/themes/

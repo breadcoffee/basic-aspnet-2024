@@ -14,15 +14,16 @@
     var num = ViewBag.TotalCount - ((page - 1) * 10);   // 전체 게시글 수를 (현재페이지 - 1)값과 페이지당 게시글 수 곱을 빼기
 }
 
+<partial name="_Notification" />
+
 <style>
     a {
         color: black;
         text-decoration: none; /* 마우스가 내려가면 밑줄해제 */
     }
-
-        a:hover {
-            text-decoration: underline; /*마우스가 올라가면 밑줄 */
-        }
+    a:hover {
+        text-decoration: underline; /*마우스가 올라가면 밑줄 */
+    }
 </style>
 
 <section class="py-5">
@@ -77,9 +78,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @(num--)
-                        </td>
+                        <td class="text-end pe-3">@(num--)</td>
                         @* <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td> *@
@@ -92,8 +91,8 @@
                             </a>
                         </td>
                         @* <td>
-                    @Html.DisplayFor(modelItem => item.Contents)
-                    </td> *@
+                        @Html.DisplayFor(modelItem => item.Contents)
+                        </td> *@
                         <td class="text-end pe-5">
                             @Html.DisplayFor(modelItem => item.Hit)
                         </td>
@@ -109,10 +108,10 @@
                             }
                         </td>
                         @* <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td> *@
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td> *@
                     </tr>
                 }
             </tbody>
@@ -145,6 +144,7 @@
                         <span class="page-link"> ＜ </span>
                     </li>
                 }
+
                 @for (var i = startPage; i <= endPage; i++) // 페이지 번호 반복출력
                 {
                     if (i == page)
@@ -160,6 +160,7 @@
                         </li>
                     }
                 }
+
                 @if (page < totalPage)
                 {
                     <li class="page-item">

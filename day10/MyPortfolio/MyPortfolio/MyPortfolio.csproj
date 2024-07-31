@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\_Notification.cshtml" />
     <Content Remove="wwwroot\sign-in.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Shared\_Notification.cshtml" />
     <None Include="wwwroot\assets\cv.ico" />
     <None Include="wwwroot\assets\favicon.ico" />
     <None Include="wwwroot\assets\profile.png" />
@@ -36,6 +38,14 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\_Notification.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\_Notification.cshtml" />
   </ItemGroup>
 
 </Project>

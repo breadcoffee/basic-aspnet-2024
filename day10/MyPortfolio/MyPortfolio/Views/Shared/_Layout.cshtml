@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,18 +12,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
-    <!-- Bootstrap icons-->
+    <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="~/css/styles.css" />
 
     <!-- SimpleMDE css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/MyPortfolio.styles.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
+
 <body class="d-flex flex-column h-100">
     <main class="flex-shrink-0">
         <!-- Navigation 공통메뉴 -->
@@ -38,13 +36,17 @@
                         <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Project">PROJECT</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Board" asp-action="Index">BOARD</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">CONTACT</a></li>
-                        @if (Context.Session.GetInt32("USER_LOGIN_KEY") == null) // 로그인 되어있지 않다면
+                        @if (Context.Session.GetInt32("USER_LOGIN_KEY") == null)
                         {
                             <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">LOGIN</a></li>
                         }
                         else
                         {
-                            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Logout">[@Context.Session.GetString("USER_EMAIL")] LOGOUT</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Logout">
+                                    [@Context.Session.GetString("USER_EMAIL")] LOGOUT
+                                </a>
+                            </li>
                         }
                     </ul>
                 </div>
